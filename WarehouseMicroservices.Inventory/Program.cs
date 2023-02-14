@@ -11,6 +11,8 @@ var services = builder.Services;
 services.AddDbContext<AppDbContext>(
     opt => opt.UseSqlite(configuration.GetConnectionString("InventoryDb")));
 
+services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
