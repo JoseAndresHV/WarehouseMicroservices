@@ -7,11 +7,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{A208
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{2F88FA42-D14F-435E-B40E-99A8AD22D7AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseMicroservices.ApiGateway", "WarehouseMicroservices.ApiGateway\WarehouseMicroservices.ApiGateway.csproj", "{09899C22-20AB-4CCA-81C7-BDF455AD4885}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarehouseMicroservices.ApiGateway", "WarehouseMicroservices.ApiGateway\WarehouseMicroservices.ApiGateway.csproj", "{09899C22-20AB-4CCA-81C7-BDF455AD4885}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseMicroservices.Inventory", "WarehouseMicroservices.Inventory\WarehouseMicroservices.Inventory.csproj", "{ED3570CC-775D-435B-B4BC-43D8DE8D22A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarehouseMicroservices.Inventory", "WarehouseMicroservices.Inventory\WarehouseMicroservices.Inventory.csproj", "{ED3570CC-775D-435B-B4BC-43D8DE8D22A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseMicroservices.Sales", "WarehouseMicroservices.Sales\WarehouseMicroservices.Sales.csproj", "{BE80D420-1216-4A19-A59B-D323265F1051}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WarehouseMicroservices.Sales", "WarehouseMicroservices.Sales\WarehouseMicroservices.Sales.csproj", "{BE80D420-1216-4A19-A59B-D323265F1051}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{86C02932-8748-4FC5-A4F6-60D4781C613C}"
+	ProjectSection(SolutionItems) = preProject
+		postman-endpoints.json = postman-endpoints.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
