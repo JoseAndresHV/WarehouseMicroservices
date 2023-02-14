@@ -1,9 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using WarehouseMicroservices.Inventory.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var configuration = builder.Configuration;
+var services = builder.Services;
 
 // Add services to the container.
 
+services.AddDbContext<AppDbContext>(
+    opt => opt.UseSqlite(configuration.GetConnectionString("InventoryDb")));
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
