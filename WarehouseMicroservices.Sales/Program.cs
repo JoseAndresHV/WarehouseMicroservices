@@ -19,6 +19,7 @@ services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 services.AddSingleton(
     s => new ServiceBusClient(configuration.GetConnectionString("ServiceBus")));
 
+services.AddSingleton<IMessagePublisher, MessagePublisher>();
 services.AddSingleton<IMessageConsumer, MessageConsumer>();
 
 services.AddScoped<ISaleService, SaleService>();

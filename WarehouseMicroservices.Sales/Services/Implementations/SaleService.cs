@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using WarehouseMicroservices.Sales.Data;
+using WarehouseMicroservices.Sales.DTOs;
 using WarehouseMicroservices.Sales.DTOs.Sale;
 using WarehouseMicroservices.Sales.Enums;
 using WarehouseMicroservices.Sales.Exceptions;
@@ -13,11 +14,13 @@ namespace WarehouseMicroservices.Sales.Services.Implementations
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IMessagePublisher _messagePublisher;
 
-        public SaleService(AppDbContext context, IMapper mapper)
+        public SaleService(AppDbContext context, IMapper mapper, IMessagePublisher messagePublisher)
         {
             _context = context;
             _mapper = mapper;
+            _messagePublisher = messagePublisher;
         }
 
         public Sale CalculateSale(Product product, int qty, TaxType taxType)
@@ -76,6 +79,13 @@ namespace WarehouseMicroservices.Sales.Services.Implementations
             _context.Sales.Remove(sale);
             await _context.SaveChangesAsync();
 
+            await _messagePublisher.Publish("SalesProductChanged",
+               new MessageDTO<Product>
+               {
+                   Event = MessageEvent.ProductRefund,
+                   Data = product
+               });
+
             return _mapper.Map<SaleDTO>(sale);
         }
 
@@ -104,6 +114,13 @@ namespace WarehouseMicroservices.Sales.Services.Implementations
 
             _context.Sales.Add(sale);
             await _context.SaveChangesAsync();
+
+            await _messagePublisher.Publish("SalesProductChanged",
+               new MessageDTO<Product>
+               {
+                   Event = MessageEvent.ProductSold,
+                   Data = product
+               });
 
             return _mapper.Map<SaleDTO>(sale);
         }

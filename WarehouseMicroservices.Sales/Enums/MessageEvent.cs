@@ -6,5 +6,6 @@
         ProductUpdated,
         ProductDeleted,
         ProductSold,
+        ProductRefund
     }
 }
