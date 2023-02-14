@@ -62,10 +62,10 @@ namespace WarehouseMicroservices.Inventory.Services.Implementations
             await _context.SaveChangesAsync();
 
             await _messagePublisher.Publish("InventoryProductChanged",
-                new MessageDTO<int>
+                new MessageDTO<Product>
                 {
                     Event = MessageEvent.ProductDeleted,
-                    Data = id
+                    Data = product
                 });
         }
 
