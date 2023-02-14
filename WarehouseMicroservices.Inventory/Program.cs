@@ -1,3 +1,4 @@
+using Azure.Messaging.ServiceBus;
 using Microsoft.EntityFrameworkCore;
 using WarehouseMicroservices.Inventory.Data;
 using WarehouseMicroservices.Inventory.Services.Implementations;
@@ -14,6 +15,11 @@ services.AddDbContext<AppDbContext>(
     opt => opt.UseSqlite(configuration.GetConnectionString("InventoryDb")));
 
 services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+services.AddSingleton(
+    s => new ServiceBusClient(configuration.GetConnectionString("ServiceBus")));
+
+services.AddSingleton<IMessagePublisher, MessagePublisher>();
 
 services.AddScoped<IProductService, ProductService>();
 

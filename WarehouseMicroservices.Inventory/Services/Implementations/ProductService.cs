@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using WarehouseMicroservices.Inventory.Data;
+using WarehouseMicroservices.Inventory.DTOs;
 using WarehouseMicroservices.Inventory.DTOs.Product;
+using WarehouseMicroservices.Inventory.Enums;
 using WarehouseMicroservices.Inventory.Exceptions;
 using WarehouseMicroservices.Inventory.Models;
 using WarehouseMicroservices.Inventory.Services.Interfaces;
@@ -12,11 +14,13 @@ namespace WarehouseMicroservices.Inventory.Services.Implementations
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IMessagePublisher _messagePublisher;
 
-        public ProductService(AppDbContext context, IMapper mapper)
+        public ProductService(AppDbContext context, IMapper mapper, IMessagePublisher messagePublisher)
         {
             _context = context;
             _mapper = mapper;
+            _messagePublisher = messagePublisher;
         }
 
         public async Task<ProductDTO> CreateProduct(CreateProductDTO createProduct)
@@ -36,6 +40,13 @@ namespace WarehouseMicroservices.Inventory.Services.Implementations
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
+            await _messagePublisher.Publish("InventoryProductChanged",
+                new MessageDTO<Product>
+                {
+                    Event = MessageEvent.ProductCreated,
+                    Data = product
+                });
+
             return _mapper.Map<ProductDTO>(product);
         }
 
@@ -49,6 +60,13 @@ namespace WarehouseMicroservices.Inventory.Services.Implementations
 
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
+
+            await _messagePublisher.Publish("InventoryProductChanged",
+                new MessageDTO<int>
+                {
+                    Event = MessageEvent.ProductDeleted,
+                    Data = id
+                });
         }
 
         public async Task<IEnumerable<ProductDTO>> GetAllProducts()
@@ -96,6 +114,13 @@ namespace WarehouseMicroservices.Inventory.Services.Implementations
 
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
+
+            await _messagePublisher.Publish("InventoryProductChanged",
+                new MessageDTO<Product>
+                {
+                    Event = MessageEvent.ProductUpdated,
+                    Data = product
+                });
 
             return _mapper.Map<ProductDTO>(product);
         }
