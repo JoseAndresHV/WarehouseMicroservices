@@ -76,8 +76,8 @@ namespace WarehouseMicroservices.Inventory.Services.Implementations
                 throw new NotMatchingIdsException();
             }
 
-            var existProduct = await _context.Products.FindAsync(id);
-            if (existProduct == null)
+            var existProduct = await _context.Products.AnyAsync(p => p.Id == id);
+            if (!existProduct)
             {
                 throw new ProductNotFoundException(id);
             }

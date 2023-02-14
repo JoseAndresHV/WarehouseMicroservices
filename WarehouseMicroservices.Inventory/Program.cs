@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WarehouseMicroservices.Inventory.Data;
+using WarehouseMicroservices.Inventory.Services.Implementations;
+using WarehouseMicroservices.Inventory.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ services.AddDbContext<AppDbContext>(
     opt => opt.UseSqlite(configuration.GetConnectionString("InventoryDb")));
 
 services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
