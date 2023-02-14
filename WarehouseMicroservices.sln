@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{A2087258-7C92-4DAE-8610-8B867C4FDB26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{2F88FA42-D14F-435E-B40E-99A8AD22D7AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseMicroservices.ApiGateway", "WarehouseMicroservices.ApiGateway\WarehouseMicroservices.ApiGateway.csproj", "{09899C22-20AB-4CCA-81C7-BDF455AD4885}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseMicroservices.Inventory", "WarehouseMicroservices.Inventory\WarehouseMicroservices.Inventory.csproj", "{ED3570CC-775D-435B-B4BC-43D8DE8D22A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarehouseMicroservices.Sales", "WarehouseMicroservices.Sales\WarehouseMicroservices.Sales.csproj", "{BE80D420-1216-4A19-A59B-D323265F1051}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09899C22-20AB-4CCA-81C7-BDF455AD4885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09899C22-20AB-4CCA-81C7-BDF455AD4885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09899C22-20AB-4CCA-81C7-BDF455AD4885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09899C22-20AB-4CCA-81C7-BDF455AD4885}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED3570CC-775D-435B-B4BC-43D8DE8D22A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED3570CC-775D-435B-B4BC-43D8DE8D22A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED3570CC-775D-435B-B4BC-43D8DE8D22A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED3570CC-775D-435B-B4BC-43D8DE8D22A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE80D420-1216-4A19-A59B-D323265F1051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE80D420-1216-4A19-A59B-D323265F1051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE80D420-1216-4A19-A59B-D323265F1051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE80D420-1216-4A19-A59B-D323265F1051}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{09899C22-20AB-4CCA-81C7-BDF455AD4885} = {A2087258-7C92-4DAE-8610-8B867C4FDB26}
+		{ED3570CC-775D-435B-B4BC-43D8DE8D22A6} = {2F88FA42-D14F-435E-B40E-99A8AD22D7AD}
+		{BE80D420-1216-4A19-A59B-D323265F1051} = {2F88FA42-D14F-435E-B40E-99A8AD22D7AD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CAA8951B-FAF4-49AD-9D0A-8CF71A5C5C8A}
+	EndGlobalSection
+EndGlobal
