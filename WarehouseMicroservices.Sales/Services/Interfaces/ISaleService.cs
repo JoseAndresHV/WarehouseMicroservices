@@ -8,8 +8,9 @@ namespace WarehouseMicroservices.Sales.Services.Interfaces
     {
         Task<IEnumerable<SaleDTO>> GetAllSales();
         Task<SaleDTO> GetSale(int id);
-        Task<SaleDTO> SellProduct(SellProductDTO sellProductDTO);
+        Task<SaleDTO> SellProduct(SellProductDTO sellProduct);
         Task<SaleDTO> RefundProduct(int saleId);
         Sale CalculateSale(Product product, int qty, TaxType taxType);
+        Task<SaleDTO> UpdateSaleStatus(int saleId, UpdateSaleStatusDTO updateSaleStatus);
     }
 }

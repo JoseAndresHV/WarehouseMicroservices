@@ -32,7 +32,8 @@ namespace WarehouseMicroservices.Sales.Services.Implementations
                 Subtotal = subtotal,
                 Tax = tax,
                 Total = subtotal + tax,
-                DateTime = DateTime.Now
+                DateTime = DateTime.Now,
+                Status = OrderStatus.Pending
             };
         }
 
@@ -78,30 +79,51 @@ namespace WarehouseMicroservices.Sales.Services.Implementations
             return _mapper.Map<SaleDTO>(sale);
         }
 
-        public async Task<SaleDTO> SellProduct(SellProductDTO sellProductDTO)
+        public async Task<SaleDTO> SellProduct(SellProductDTO sellProduct)
         {
-            var product = await _context.Products.FindAsync(sellProductDTO.ProductId);
+            var product = await _context.Products.FindAsync(sellProduct.ProductId);
             if (product == null)
             {
-                throw new ProductNotFoundException(sellProductDTO.ProductId);
+                throw new ProductNotFoundException(sellProduct.ProductId);
             }
 
-            if (sellProductDTO.Qty <= 0)
+            if (sellProduct.Qty <= 0)
             {
-                throw new InvalidQtyException(sellProductDTO.Qty);
+                throw new InvalidQtyException(sellProduct.Qty);
             }
 
-            if (sellProductDTO.Qty > product!.Stock || product.Stock <= 0)
+            if (sellProduct.Qty > product!.Stock || product.Stock <= 0)
             {
-                throw new NotEnoughStockException(product.ProductName, sellProductDTO.Qty);
+                throw new NotEnoughStockException(product.ProductName, sellProduct.Qty);
             }
 
-            product!.Stock -= sellProductDTO.Qty;
+            product!.Stock -= sellProduct.Qty;
             _context.Products.Update(product);
 
-            var sale = CalculateSale(product, sellProductDTO.Qty, TaxType.IVA);
+            var sale = CalculateSale(product, sellProduct.Qty, TaxType.IVA);
 
             _context.Sales.Add(sale);
+            await _context.SaveChangesAsync();
+
+            return _mapper.Map<SaleDTO>(sale);
+        }
+
+        public async Task<SaleDTO> UpdateSaleStatus(int saleId, UpdateSaleStatusDTO updateSaleStatus)
+        {
+            if (saleId != updateSaleStatus.Id)
+            {
+                throw new NotMatchingIdsException();
+            }
+
+            var sale = await _context.Sales.FindAsync(saleId);
+            if (sale == null)
+            {
+                throw new SaleNotFoundException(saleId);
+            }
+
+            sale.Status = updateSaleStatus.Status;
+
+            _context.Sales.Update(sale);
             await _context.SaveChangesAsync();
 
             return _mapper.Map<SaleDTO>(sale);
