@@ -96,7 +96,7 @@ namespace WarehouseMicroservices.Inventory.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public async Task<ActionResult<ResponseDTO<int>>> DeleteProduct(int id)
         {
             var response = new ResponseDTO<int>();
             try
