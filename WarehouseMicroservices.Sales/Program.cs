@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WarehouseMicroservices.Sales.Data;
+using WarehouseMicroservices.Sales.Services.Implementations;
+using WarehouseMicroservices.Sales.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,10 @@ var services = builder.Services;
 
 services.AddDbContext<AppDbContext>(
     opt => opt.UseSqlite(configuration.GetConnectionString("SalesDb")));
+
+services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+services.AddScoped<ISaleService, SaleService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
