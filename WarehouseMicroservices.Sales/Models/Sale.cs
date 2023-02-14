@@ -1,4 +1,6 @@
-﻿namespace WarehouseMicroservices.Sales.Models
+﻿using WarehouseMicroservices.Sales.Enums;
+
+namespace WarehouseMicroservices.Sales.Models
 {
     public class Sale
     {
@@ -9,5 +11,6 @@
         public decimal Tax { get; set; }
         public decimal Total { get; set; }
         public DateTime DateTime { get; set; }
+        public OrderStatus Status { get; set; }
     }
 }

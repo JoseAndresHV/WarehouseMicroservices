@@ -9,5 +9,6 @@
         public decimal Tax { get; init; }
         public decimal Total { get; init; }
         public DateTime DateTime { get; init; }
+        public string Status { get; set; } = null!;
     }
 }
