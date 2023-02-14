@@ -12,5 +12,7 @@ namespace WarehouseMicroservices.Sales.Models
         public decimal Total { get; set; }
         public DateTime DateTime { get; set; }
         public OrderStatus Status { get; set; }
+
+        public Product Product { get; set; } = default!;
     }
 }
